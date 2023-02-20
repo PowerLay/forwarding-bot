@@ -116,6 +116,7 @@ BOT_TOKEN =
 USER_TOKEN =
 SOURCE_ID =
 DESTINATION_ID =
+DESTINATION_TOPIC_ID =
 ```
 
 Далее заполните файл данными. Про получение данных обратитесь к пункту [Что нужно?](https://github.com/dhvcc/forwarding-bot#что-нужно)
@@ -124,6 +125,7 @@ DESTINATION_ID =
 - В `USER_TOKEN` запишите ключ доступа одного из администраторов беседы VK
 - В `SOURCE_ID` запишите ID беседы VK
 - В `DESTINATION_ID` запишите ID чата Telegram
+- В `DESTINATION_TOPIC_ID` запишите ID topic id чата Telegram
 
 
 ### Запуск

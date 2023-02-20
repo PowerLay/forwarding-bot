@@ -18,21 +18,25 @@ async def handle_attachment(
     logger.debug(f"One attachment with type {msg_attachment.type}")
     if MessageHelper.is_link_attachment(msg_attachment):
         response = await bot.send_message(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                                           text=message_text +
                                           MessageHelper.get_attachment_link(msg_attachment),
                                           parse_mode=PARSE_MODE)
     elif msg_attachment.type == "sticker":
         response = await bot.send_message(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                                           text=message_text + "*sticker*",
                                           parse_mode=PARSE_MODE)
     elif msg_attachment.type == "photo":
         source = max(msg_attachment.photo.sizes, key=lambda size: size.width)
         response = await bot.send_photo(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                                         caption=message_text,
                                         photo=source.url,
                                         parse_mode=PARSE_MODE)
     elif msg_attachment.type == "audio_message":
         response = await bot.send_voice(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                                         caption=message_text,
                                         voice=msg_attachment.audio_message.link_ogg,
                                         parse_mode=PARSE_MODE)
@@ -40,6 +44,7 @@ async def handle_attachment(
         doc = types.InputFile.from_url(url=msg_attachment.doc.url,
                                        filename=msg_attachment.doc.title)
         response = await bot.send_document(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                                            caption=message_text,
                                            document=doc,
                                            parse_mode=PARSE_MODE)

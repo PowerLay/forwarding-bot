@@ -159,12 +159,14 @@ async def handle_nested(
         if attach.type == "photo":
             source = max(attach.photo.sizes, key=lambda size: size.width)
             response = await bot.send_photo(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                                             caption=name,
                                             photo=source.url,
                                             parse_mode=PARSE_MODE)
             logger.debug("sent photo")
         elif attach.type == "audio_message":
             response = await bot.send_voice(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                                             caption=name,
                                             voice=attach.audio_message.link_ogg,
                                             parse_mode=PARSE_MODE)
@@ -172,6 +174,7 @@ async def handle_nested(
             data = types.InputFile.from_url(url=attach.doc.url,
                                             filename=attach.doc.title)
             response = await bot.send_document(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                                                caption=name,
                                                document=data,
                                                parse_mode=PARSE_MODE)
@@ -184,6 +187,7 @@ async def handle_nested(
     logger.debug("Sent attachments, sending text...")
 
     await bot.send_message(chat_id=data_config.destination_id,
+                                          message_thread_id=data_config.destination_topic_id,
                            text=message_text.format(**message_references),
                            parse_mode=PARSE_MODE)
 

@@ -21,6 +21,8 @@ class ArgParser:
                                  type=int)
         self.parser.add_argument("-d", "--destination-id", help="TG destination conversation id",
                                  type=int)
+        self.parser.add_argument("-t", "--destination-topic-id", help="TG destination topic conversation id",
+                                 type=int)
 
     def get_args(self) -> Union[argparse.Namespace, ArgsModel]:
         """Using namespace because it is in fact a Namespace, but linting should be according to ArgsModel"""

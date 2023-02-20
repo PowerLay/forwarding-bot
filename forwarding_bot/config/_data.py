@@ -21,6 +21,7 @@ class DataConfig:
         self.bot_token: Optional[str] = None
         self.user_token: Optional[str] = None
         self.destination_id: Optional[int] = None
+        self.destination_topic_id: Optional[int] = None
         self.source_id: Optional[int] = None
 
     def load(
@@ -44,6 +45,7 @@ class DataConfig:
         self.bot_token = arguments.bot_token
         self.user_token = arguments.user_token
         self.destination_id = arguments.destination_id
+        self.destination_topic_id = arguments.destination_topic_id
         self.source_id = arguments.source_id
 
     def load_ini(self, config_: ConfigParser):
@@ -62,6 +64,9 @@ class DataConfig:
         if not self.destination_id and config.get("DESTINATION_ID"):
             self.destination_id = config.getint("DESTINATION_ID")
 
+        if not self.destination_topic_id and config.get("destination_topic_id"):
+            self.destination_topic_id = config.getint("destination_topic_id")
+
         if not self.source_id and config.get("SOURCE_ID"):
             self.source_id = config.getint("SOURCE_ID")
 
@@ -76,6 +81,9 @@ class DataConfig:
 
         if self.destination_id is None:
             self.destination_id = int(environment.get("FORWARDING_BOT_DESTINATION_ID", 0))
+
+        if self.destination_topic_id is None:
+            self.destination_topic_id = int(environment.get("FORWARDING_BOT_DESTINATION_TOPIC_ID", 0))
 
         if self.source_id is None:
             self.source_id = int(environment.get("FORWARDING_BOT_SOURCE_ID", 0))

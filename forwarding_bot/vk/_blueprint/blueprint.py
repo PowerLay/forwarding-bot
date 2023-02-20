@@ -63,6 +63,7 @@ async def handler(message: Message) -> NoReturn:
         logger.info("No valid attachments or forwarded messages, sending text")
 
         await bot.send_message(chat_id=data_config.destination_id,
+                                message_thread_id=data_config.destination_topic_id,
                                text=formatted_message,
                                parse_mode=PARSE_MODE)
 
